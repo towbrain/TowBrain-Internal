@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, type FormEvent, type ReactNode } from 'react'
-import { Menu, Search, LogOut, UserCircle } from 'lucide-react'
+import { Menu, Search, LogOut, UserCircle, Sun, Moon } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Avatar } from '@/components/ui/avatar'
 import {
@@ -12,6 +12,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { supabase } from '@/lib/supabase'
+import { applyTheme } from '@/hooks/useTheme'
+import { updatePreferences } from '@/lib/settingsApi'
 import type { Profile } from '@/types/domain'
 
 export function Topbar({
@@ -38,6 +40,17 @@ export function Topbar({
     navigate('/login')
   }
 
+  const currentTheme = profile?.preferences.theme ?? 'system'
+  const isDark =
+    currentTheme === 'dark' ||
+    (currentTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+  async function toggleTheme() {
+    const next = isDark ? 'light' : 'dark'
+    applyTheme(next)
+    if (profile) await updatePreferences(profile.id, { ...profile.preferences, theme: next })
+  }
+
   return (
     <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-border bg-card px-4">
       <div className="flex items-center gap-3">
@@ -62,6 +75,13 @@ export function Topbar({
 
       <div className="flex items-center gap-2">
         {actions}
+        <button
+          onClick={toggleTheme}
+          className="rounded-sm p-2 hover:bg-accent"
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+        </button>
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-2 rounded-md p-1 hover:bg-accent focus-visible:outline-none">
             <Avatar name={profile?.full_name ?? '?'} src={profile?.avatar_url} />

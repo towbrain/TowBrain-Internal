@@ -6,6 +6,7 @@ export const leadFormSchema = z.object({
   email: z.string().trim().email('Enter a valid email').optional().or(z.literal('')),
   phone: z.string().trim().optional().or(z.literal('')),
   website: z.string().trim().optional().or(z.literal('')),
+  google_maps_url: z.string().trim().optional().or(z.literal('')),
   source: z.string().trim().optional().or(z.literal('')),
   status: z.string().min(1, 'Stage is required'),
   approval_status: z.enum(['not_submitted', 'pending', 'approved', 'rejected']),

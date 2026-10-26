@@ -7,6 +7,7 @@ export interface LeadInput {
   email: string | null
   phone: string | null
   website: string | null
+  google_maps_url: string | null
   source: string | null
   status: string
   approval_status: ApprovalStatus

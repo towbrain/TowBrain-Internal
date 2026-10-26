@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { Mail, Phone, Globe, Building2, Pencil } from 'lucide-react'
+import { Mail, Phone, Globe, MapPin, Building2, Pencil } from 'lucide-react'
 import { toast } from 'sonner'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Badge } from '@/components/ui/badge'
@@ -121,6 +121,16 @@ export function LeadDetailDialog({ lead, trigger, onChanged }: { lead: Lead; tri
               className="flex items-center gap-2 text-foreground hover:underline"
             >
               <Globe className="size-4 text-muted-foreground" /> {lead.website}
+            </a>
+          )}
+          {lead.google_maps_url && (
+            <a
+              href={lead.google_maps_url}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 text-foreground hover:underline"
+            >
+              <MapPin className="size-4 text-muted-foreground" /> Google Maps
             </a>
           )}
           <div className="text-muted-foreground">

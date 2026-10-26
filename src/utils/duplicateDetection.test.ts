@@ -10,6 +10,7 @@ function makeLead(overrides: Partial<Lead>): Lead {
     email: null,
     phone: null,
     website: null,
+    google_maps_url: null,
     source: null,
     status: 'new',
     approval_status: 'not_submitted',

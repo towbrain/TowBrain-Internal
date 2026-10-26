@@ -56,6 +56,7 @@ export function LeadFormDialog({
           email: lead.email ?? '',
           phone: lead.phone ?? '',
           website: lead.website ?? '',
+          google_maps_url: lead.google_maps_url ?? '',
           source: lead.source ?? '',
           status: lead.status,
           approval_status: lead.approval_status,
@@ -70,6 +71,7 @@ export function LeadFormDialog({
           email: '',
           phone: '',
           website: '',
+          google_maps_url: '',
           source: '',
           status: defaultStatus ?? stages[0]?.key ?? '',
           approval_status: 'not_submitted',
@@ -91,6 +93,7 @@ export function LeadFormDialog({
       email: values.email || null,
       phone: values.phone || null,
       website: values.website || null,
+      google_maps_url: values.google_maps_url || null,
       source: values.source || null,
       status: values.status,
       approval_status: values.approval_status,
@@ -166,6 +169,10 @@ export function LeadFormDialog({
             <div className="space-y-1.5">
               <Label htmlFor="website">Website</Label>
               <Input id="website" {...register('website')} />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="google_maps_url">Google Maps link</Label>
+              <Input id="google_maps_url" placeholder="https://maps.app.goo.gl/…" {...register('google_maps_url')} />
             </div>
 
             <div className="space-y-1.5">
