@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback: every path serves index.html so client-side routes (e.g. /leads)
+# work on a hard refresh or a direct link, not just via in-app navigation.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
